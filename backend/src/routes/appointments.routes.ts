@@ -18,7 +18,7 @@ appointmentRouter.post('/', (request, response) => {
   const parseDate = startOfHour(parseISO(date));
 
   const findAppointmentInSameDate = appointments.find(appointment =>
-    isEqual(appointment.date, parseDate),
+    isEqual(parseDate, appointment.date),
   );
 
   if (findAppointmentInSameDate) {
@@ -30,7 +30,7 @@ appointmentRouter.post('/', (request, response) => {
   const appointment = {
     id: uuid(),
     provider,
-    date,
+    date: parseDate,
   };
 
   appointments.push(appointment);
